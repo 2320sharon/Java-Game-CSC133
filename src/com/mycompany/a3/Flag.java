@@ -38,10 +38,10 @@ public class Flag extends Fixed {
 	 */
 	public Flag(int FlagNum, float xLoc, float yLoc) 
 	{
-		//Makes the Flag's size 10 
+		//Makes the Flag's size 80 
 		//Place the Flag within the map
 		//Flag cannot change its location after creation
-		super(60, xLoc ,yLoc );
+		super(80, xLoc ,yLoc );
 		
 		//Sets the flag's SeqNumber
 		setSequenceNumber(FlagNum);
@@ -75,7 +75,10 @@ public class Flag extends Fixed {
 		int numPoints =3;
 				
 		g.setColor(getColor());
-		g.fillPolygon(xPoints, yPoints, numPoints);
+		if (this.isSelected() == true)
+			g.drawPolygon(xPoints, yPoints, numPoints);
+		else
+			g.fillPolygon(xPoints, yPoints, numPoints);
 		
 		//put the text on top of the flag
 		//the text is black
@@ -83,7 +86,7 @@ public class Flag extends Fixed {
 		//text is in the middle of the flag and subtract the font size to get it in the proper location
 		int xText= (int)(pCmpRelPrnt.getX()+super.getLocation().getX()-(g.getFont().getPixelSize() / 2));
 		int yText=(int)(pCmpRelPrnt.getY()+super.getLocation().getY()- (g.getFont().getPixelSize() / 2));
-		g.drawString(Integer.toString(this.getSequenceNumber()), xText, yText);
+		g.drawString(Integer.toString(this.getSequenceNumber()), xText, yText-20);
 		
 	}
 
@@ -92,6 +95,28 @@ public class Flag extends Fixed {
 	public void handleCollision(ICollider collideObject) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public boolean contains(Point pPtrRelParent, Point pCmpRelParent) {
+		System.out.println("Flag is at: "+ pPtrRelParent.getX() + " , "+pPtrRelParent.getY() );
+		//Pointer's Coordinates
+		int pointerX=(int)pPtrRelParent.getX();
+		int pointerY=(int)pPtrRelParent.getY();
+		
+		//location of flag relative to mapview
+		int xLoc=(int)(pCmpRelParent.getX() + this.getLocation().getX());
+		int yLoc=(int)(pCmpRelParent.getY() + this.getLocation().getY());
+		
+		System.out.println("Pointer is at: "+pointerX + " , "+pointerY );
+		System.out.println("Flag is "+this.getSequenceNumber()+ " at: "+xLoc + " , "+yLoc );
+		System.out.println("Size of flag is"+ this.getSize());
+		//is the pointer within the flag
+		if((((pointerX >= xLoc) && (pointerX <= xLoc + this.getSize()/2)) || ((pointerX < xLoc) && (pointerX >= xLoc - this.getSize()/2) ))  && (((pointerY < yLoc) && (pointerY >= yLoc - this.getSize()/2) )||(pointerY>= yLoc) && (pointerY <= yLoc + this.getSize()/2)) )
+			return true;
+		else
+			return false;
 	}
 
 	

@@ -15,10 +15,10 @@ public class GameWorld extends Observable {
 	private static int clock ; 
 	private int width;
 	private int height;
+	private boolean positionSet;
 	private boolean sound;
 	private boolean isSoundEnabled;
 	private GameObjectCollection gameObjCollection;
-//	private static GameWorld gw;
 	
 	//Sounds used in the gameworld
 	private Sound spiderCollision;
@@ -37,12 +37,6 @@ public class GameWorld extends Observable {
 //		setSound(true);
 	}
 	
-	
-//	public GameWorld getGameWorld() {
-////		if (gw == null)
-////			gw= new GameWorld();
-//		return this;
-//	}
 	
 	/* init()
 	 * Creates all the gameObjects in the gameWorld.
@@ -154,12 +148,17 @@ public class GameWorld extends Observable {
 	}
 	
 	
-	//Allows the user to pause the game to move the positions of fixed objects
-	public void position()
+	//Allows the user to pause the game to move the positions of fixed object
+	public void setPosition(boolean pos)
 	{
-		
+		positionSet=pos;
 	}
 
+	public boolean getPosition()
+	{
+		return positionSet;
+	}
+	
 	private void setClock(int clock) {
 		this.clock = clock;
 	}

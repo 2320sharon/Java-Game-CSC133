@@ -12,8 +12,8 @@ public class PositionCommand extends Command {
 	
 	@Override
 	public void actionPerformed(ActionEvent ev) {
-		gameworld.position();
-		System.out.print("\n Position Command Acitiviated");
+		gameworld.setPosition(true);
+		System.out.println("\n Position Command Acitiviated");
 	}
 
 }

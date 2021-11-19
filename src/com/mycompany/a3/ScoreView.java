@@ -21,7 +21,6 @@ import com.codename1.ui.plaf.Border;
  */
 public class ScoreView extends Container implements Observer {
 
-	private Label scoreLabel;
 	private Label timeLabel;
 	private Label livesLabel;
 	private Label lastFlagLabel;
@@ -32,12 +31,6 @@ public class ScoreView extends Container implements Observer {
 	public ScoreView() {
 		//Create horizontal container to hold labels
 		setLayout(new BoxLayout(BoxLayout.X_AXIS));
-		
-		scoreLabel = new Label("Score: 0");
-		scoreLabel.getAllStyles().setFgColor(ColorUtil.BLUE);//make the label foreground blue
-		scoreLabel.getAllStyles().setPadding(3,3,3,3);
-		scoreLabel.getAllStyles().setMargin(RIGHT, 2);
-		addComponent(scoreLabel);
 		
 		timeLabel = new Label("Time: 0");
 		timeLabel.getAllStyles().setFgColor(ColorUtil.BLUE);//make the label foreground blue

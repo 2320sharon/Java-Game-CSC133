@@ -5,7 +5,10 @@ package com.mycompany.a3;
  * */
 
 
-public abstract class Fixed extends GameObject {
+public abstract class Fixed extends GameObject implements ISelectable {
+	
+	//selected: true if object is currently selected
+	private boolean selected;
 	
 	//Pass the size of the object to the parent GameObject
 	//Fixed objects can only set their location on creation
@@ -15,10 +18,14 @@ public abstract class Fixed extends GameObject {
 		super.setLocation(x, y);
 	}
 	
-	//Cannot change the location after the fixed object is created
-	@Override
-	public void setLocation(float x, float y)
+	public void setSelected(boolean value)
 	{
+		selected=value;
+	}
+	
+	public boolean isSelected()
+	{
+		return selected;
 	}
 
 }

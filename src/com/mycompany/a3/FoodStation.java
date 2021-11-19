@@ -27,15 +27,14 @@ public class FoodStation extends Fixed {
 	 * The food station's size and location cannot be changed after creation.
 	 */
 	public FoodStation(int width, int height) {
-		//Makes the FoodStation's size a random value between 40 and 70
 //		Random randNum= new Random();
-//		//Makes the FoodStation's size a random value between 40 and 70
+//		//Makes the FoodStation's size a random value between 60 and 80
 		//Place the FoodStation in a random spot within the map
 		//to prevent FoodStation's being placed on the map border place them within 999x999 square
-		super((new Random()).nextInt(71)+40,((new Random()).nextFloat()* width)+1, ((new Random()).nextFloat()*height)+1);
+		super((new Random()).nextInt(80)+20,((new Random()).nextFloat()* width)+1, ((new Random()).nextFloat()*height)+1);
 		
 		//The amount of food held by FoodStation is proportional to the size 
-		setCapacity(this.getSize()-40);
+		setCapacity(this.getSize());
 		
 		//Sets the FoodStation's color to green
 		super.setColor(0, 255, 0);
@@ -54,7 +53,10 @@ public class FoodStation extends Fixed {
 		float y=(pCmpRelPrnt.getY()+super.getLocation().getY() - super.getSize()/2);
 
 		g.setColor(getColor());
-		g.fillRect((int)x, (int)y, getSize(), getSize());
+		if (this.isSelected() == true)
+			g.drawRect((int)x, (int)y, getSize(), getSize());
+		else
+			g.fillRect((int)x, (int)y, getSize(), getSize());
 		
 		//put the text on top of the food station
 		//the text is black
@@ -62,11 +64,28 @@ public class FoodStation extends Fixed {
 		//text is in the middle of the flag and subtract the font size to get it in the proper location
 		int xText= (int)(pCmpRelPrnt.getX()+super.getLocation().getX()-(g.getFont().getPixelSize() / 2));
 		int yText=(int)(pCmpRelPrnt.getY()+super.getLocation().getY()- (g.getFont().getPixelSize() / 2));
-		g.drawString(Integer.toString(this.getCapacity()), xText, yText);
-//		g.drawString(Integer.toString((int)this.getLocation().getX()), xText, yText);
-//		g.drawString(Integer.toString((int)this.getLocation().getY()), xText, yText+40);
+		g.drawString(Integer.toString(this.getCapacity()), xText , yText -10);
 	}
 
+	@Override
+	public boolean contains(Point pPtrRelParent, Point pCmpRelParent) {
+		//Pointer's Coordinates
+		int pointerX=(int)pPtrRelParent.getX();
+		int pointerY=(int)pPtrRelParent.getY();
+		
+		//location of foodstation relative to mapview
+		int xLoc=(int)(pCmpRelParent.getX() + this.getLocation().getX());
+		int yLoc=(int)(pCmpRelParent.getY() + this.getLocation().getY());
+		
+		System.out.println("Pointer is at: "+pointerX + " , "+pointerY );
+		System.out.println("FoodStation "+this.getCapacity()+ " is at: "+xLoc + " , "+yLoc );
+		
+		//is the pointer within the foodstation
+		if((((pointerX >= xLoc) && (pointerX <= xLoc + this.getSize()/2)) || ((pointerX < xLoc) && (pointerX >= xLoc - this.getSize()/2) ))  && (((pointerY < yLoc) && (pointerY >= yLoc - this.getSize()/2) )||(pointerY>= yLoc) && (pointerY <= yLoc + this.getSize()/2)) )
+			return true;
+		
+		return false;
+	}
 
 	@Override
 	public void handleCollision(ICollider collideObject) {

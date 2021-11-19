@@ -224,8 +224,7 @@ public class Game extends Form implements Runnable{
 			removeKeyListener('l', leftCmd);
 			
 			//mapview is now selectable
-			//TODO add code here
-			
+			mv.setSelectAllowed(true);		
 		}
 		else	//game is in playmode
 		{
@@ -254,9 +253,9 @@ public class Game extends Form implements Runnable{
 			
 			//disable the position button
 			positionButton.setEnabled(false);
-			
 			//mapview is not longer selectable
-			//TODO add code here			
+			mv.setPlayMode(true);				//resets all the objects to unselected
+			mv.setSelectAllowed(false);		
 		}
 
 		

@@ -30,8 +30,8 @@ public class Ant extends Moveable implements Isteerable , ICollider {
 	 * @param  initialLocation :a Point containing the location of the first flag
 	 */
 	private Ant(Point initialLocation, GameWorld gameworld) {
-		//Set the ant's initial heading to 0 and size to 50
-		super(50);
+		//Set the ant's initial heading to 0 and size to 90
+		super(90);
 		super.setHeading(0);
 		//set the Ant's color to blue
 		super.setColor(0, 0, 255);
