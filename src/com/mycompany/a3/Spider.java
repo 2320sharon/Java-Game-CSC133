@@ -15,7 +15,7 @@ public class Spider extends Moveable {
 	*/
 	public Spider(int width, int height) {
 		//sets the spider's size randomly between 50 and 80
-		super((new Random()).nextInt(81)+50);
+		super((new Random()).nextInt(30)+50);
 		Random randNum = new Random();
 		//Sets the spider location randomly location randomly between 1 and 999
 		super.setLocation(randNum.nextFloat()*width+1,randNum.nextFloat()*height+1);

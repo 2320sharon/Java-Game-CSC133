@@ -16,7 +16,13 @@ public class SoundCommand extends Command {
 			gameworld.setSound(false);
 		else
 			gameworld.setSound(true);
-		gameworld.changeBGSound();
+		
+		if(gameworld.getSound() == true)
+		{
+			gameworld.changeBGSound(true);
+		}
+		else
+			gameworld.changeBGSound(false);
 		System.out.print("\n Sound modified to: "+ gameworld.getSound());
 	}
 

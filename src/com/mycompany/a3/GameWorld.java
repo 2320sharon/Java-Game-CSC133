@@ -184,13 +184,16 @@ public class GameWorld extends Observable {
 		}
 	}
 	
-	public void changeBGSound() {
-	if (getSound()== true)
+	public void changeBGSound(boolean playSound) {
+	if (backgroundSound == null )
+	{
+		createSounds();
+	}
+	
+	if (playSound)
 		backgroundSound.play();
 	else
-	{
 		backgroundSound.pause();
-	}
 }
 	
 	/*createSounds()bird

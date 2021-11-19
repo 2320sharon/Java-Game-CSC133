@@ -179,7 +179,10 @@ public class Game extends Form implements Runnable{
 		//You can only call create sounds after the container is shown to screen
 		gw.createSounds();
 		revalidate();			//fix the GUI
-		gw.changeBGSound();		//play or pause the BGSound
+		if(gw.getSound())
+			gw.changeBGSound(true);		//play or pause the BGSound
+		else
+			gw.changeBGSound(false);
 		
 		//Set the elapsed time to 20msecs
 		elapsedTime=20;
@@ -201,8 +204,8 @@ public class Game extends Form implements Runnable{
 		if(this.getPaused() == true)
 		{
 			//Turn off all sound
-			gw.setSound(false);
-			gw.changeBGSound();
+//			gw.setSound(false);
+			gw.changeBGSound(false);
 			//Stop the timer
 			timer.cancel();
 			//Change the pauseButton's label to play
@@ -228,11 +231,9 @@ public class Game extends Form implements Runnable{
 		}
 		else	//game is in playmode
 		{
-			//Enable all the sounds
-			if (gw.getSound() != false)
-				gw.setSound(true);
-			
-			gw.changeBGSound();
+			//Allow the background to play if sound was previously set to true
+			if (gw.getSound())
+				gw.changeBGSound(true);
 			
 			//Change the pauseButton's label to play
 			pauseButton.setText("Pause");
